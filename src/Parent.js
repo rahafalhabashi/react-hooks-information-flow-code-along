@@ -5,11 +5,21 @@ import Child from "./Child";
 function Parent() {
   const randomColor = getRandomColor();
   const [color, setColor] = useState(randomColor);
+  const [childrenColor, setChildrenColor] = useState("#FFF")
+
+  function handleChangeColor(newChildColor) {
+    const newRandomColor = getRandomColor()
+    setColor(newRandomColor)
+    setChildrenColor(newChildColor)
+  }
 
   return (
     <div className="parent" style={{ backgroundColor: color }}>
-      <Child />
-      <Child />
+      {/* when div in the child component (child.js) is clicked, it will the onChangeColor VARIABLE to determine which function to run */}
+
+      {/* onChangeColor is a prop thats passed down from the parent component and refrences the handleChangeColor FUNCTION */}
+      <Child color={childrenColor} onChangeColor={handleChangeColor} />
+      <Child color={childrenColor} onChangeColor={handleChangeColor}/>
     </div>
   );
 }
